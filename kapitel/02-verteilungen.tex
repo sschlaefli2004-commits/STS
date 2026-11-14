@@ -1,0 +1,185 @@
+\section{Diskrete Verteilungen (Kap.\ 3.4)}
+
+\begin{merke}[{{Welche Verteilung? (Entscheidungshilfe)}}]
+\begin{itemize}
+\pfeil Zählen \emph{Erfolge} in $n$ unabh.\ Versuchen, gleiches $p$ $\to$ \textbf{Binomial}
+\pfeil $k$ Ausgänge statt 2, Anzahl je Ausgang $\to$ \textbf{Multinomial}
+\pfeil Ziehen \emph{ohne Zurücklegen} aus endl.\ Menge $\to$ \textbf{Hypergeom.}
+\pfeil Warten bis 1.\ Erfolg $\to$ \textbf{Geom} (Kap.\ 3.1)
+\pfeil viele Versuche, kleines $p$, Rate $\lambda$ gegeben $\to$ \textbf{Poisson}
+\end{itemize}
+\end{merke}
+
+\subsection{Binomialverteilung}
+\begin{merke}[{{$X\sim\mathrm{Binomial}(n,p)$}}]
+\begin{itemize}
+\pfeil $X$ = Anzahl Erfolge in $n$ unabh.\ Wiederholungen, Erfolgswahrsch.\ $p$
+\pfeil $\Omega_X=\{0,\dots,n\}$
+\end{itemize}
+\end{merke}
+\begin{formel}
+$\displaystyle p_X(k)=\binom nk p^k(1-p)^{n-k}$\\[2pt]
+$E[X]=np\qquad \operatorname{var}(X)=np(1-p)$
+\end{formel}
+\begin{itemize}
+\pfeil Summe $=(p+(1-p))^n=1$ (binomische Formel)
+\pfeil $\binom nk$ = Anzahl Positionen der $k$ Erfolge
+\pfeil Herleitung $E$: $X=X_1+\dots+X_n$, $E[X_i]=p$
+\pfeil $P(X\ge k)=1-P(X\le k-1)$ (Komplement nutzen)
+\end{itemize}
+\begin{bsp}[{{Aufg.\ 3.4.3: 10 Fragen, 4 Antworten, $p=\frac14$}}]
+$P(X=3)=\binom{10}3(\frac14)^3(\frac34)^7\approx0.250$\\
+$E[X]=10\cdot\frac14=2.5$
+\end{bsp}
+\begin{bsp}[{{Aufg.\ 3.4.4: $\ge8$ von 10 richtig}}]
+$P=\sum_{k=8}^{10}\binom{10}k p^k(1-p)^{10-k}$\\
+$p=0.5$: $\frac{45+10+1}{1024}\approx0.055$\quad $p=0.95$: $\approx0.988$
+\end{bsp}
+\begin{bsp}[{{6 Würfel, genau zweimal die 4}}]
+$\binom62(\frac16)^2(\frac56)^4\approx0.2$
+\end{bsp}
+\begin{bsp}[{{Turnier: zuerst 3 Siege, Rundenwahrsch.\ $p=\frac23$}}]
+Sieg in Runde 3, 4 oder 5, letzte Runde gewonnen:\\
+$P=p^3+\binom32p^3(1-p)+\binom42p^3(1-p)^2\approx0.790$\\
+allg.\ $n$ Siege: $p^n\sum_{k=0}^{n-1}\binom{n-1+k}{n-1}(1-p)^k$
+\end{bsp}
+\begin{bsp}[{{Binomial als Näherung: 13 aus 52 Karten, Asse}}]
+$k=2$: exakt $\frac{\binom42\binom{48}{11}}{\binom{52}{13}}\approx0.2135$,\ Binomial$(4,\frac14)$: $0.2109$\\
+(Ereignisse nicht unabhängig $\Rightarrow$ nur Näherung)
+\end{bsp}
+
+\subsection{Multinomialverteilung}
+\begin{merke}[{{$X\sim\mathrm{Multinomial}(n,p_1,\dots,p_k)$}}]
+\begin{itemize}
+\pfeil $n$ unabh.\ Versuche, $k$ Ausgänge mit $p_1,\dots,p_k$ ($\sum p_j=1$)
+\pfeil $X_j$ = Anzahl Ausgang $j$, mit $n_1+\dots+n_k=n$
+\end{itemize}
+\end{merke}
+\begin{formel}
+$\displaystyle p(n_1,\dots,n_k)=\frac{n!}{n_1!\cdots n_k!}\,p_1^{n_1}\cdots p_k^{n_k}$
+\end{formel}
+\begin{itemize}
+\pfeil $\frac{n!}{n_1!\cdots n_k!}$ = Anordnungen der Ausgänge auf die $n$ Versuche
+\pfeil $k=2$: ergibt Binomial
+\pfeil Bedingungen wie «mindestens/höchstens»: alle passenden $(n_1,\dots,n_k)$ aufzählen und addieren
+\end{itemize}
+\begin{bsp}[{{Würfel: 3 Seiten 1, 2 Seiten 2, 1 Seite 3; 10 Würfe}}]
+$p=(\frac12,\frac13,\frac16)$, $(5,3,2)$:\\
+$\frac{10!}{5!\,3!\,2!}(\frac12)^5(\frac13)^3(\frac16)^2\approx0.081$
+\end{bsp}
+\begin{bsp}[{{Bauteile 70\,\% sehr gut, 20\,\% gut, 10\,\% mangelhaft}}]
+15 Stück, $(10,3,2)$: $\frac{15!}{10!\,3!\,2!}0.7^{10}0.2^30.1^2\approx0.068$\\
+Aufg.\ 3.4.9: 20 Stück, $\ge10$ sehr gut \emph{und} $\le2$ mangelh.:\\
+$\sum_{n_3=0}^{2}\ \sum_{n_1=10}^{20-n_3}\frac{20!}{n_1!n_2!n_3!}0.7^{n_1}0.2^{n_2}0.1^{n_3}\approx0.673$,\ $n_2=20-n_1-n_3$
+\end{bsp}
+
+\subsection{Hypergeometrische Verteilung}
+\begin{merke}[{{$X\sim\mathrm{HypGeom}(g,h,n)$}}]
+\begin{itemize}
+\pfeil Gesamtheit $g$, davon $h$ «markiert», Stichprobe $n$ \emph{ohne Zurücklegen}
+\pfeil $X$ = Anzahl Markierte in der Stichprobe, $\Omega_X=\{0,\dots,\min\{n,h\}\}$
+\end{itemize}
+\end{merke}
+\begin{formel}
+$\displaystyle p_X(k)=\frac{\binom hk\binom{g-h}{n-k}}{\binom gn}$\\[3pt]
+$\displaystyle E[X]=n\frac hg\qquad
+\operatorname{var}(X)=n\frac hg\Big(1-\frac hg\Big)\frac{g-n}{g-1}$
+\end{formel}
+\begin{itemize}
+\pfeil Schema: (Markierte wählen)$\cdot$(Rest wählen) / (alle Stichproben)
+\pfeil Zähler-Zahlen oben: $h+(g-h)=g$, unten: $k+(n-k)=n$ (Kontrolle)
+\pfeil $\frac{g-n}{g-1}$ = Endlichkeitskorrektur (Wert $<1$)
+\pfeil \textbf{Näherung} für $\frac ng\ll1$: $\mathrm{Binomial}(n,p=\frac hg)$
+\end{itemize}
+\begin{bsp}[{{8 rote, 15 schwarze Kugeln, 6 ziehen, genau 4 rote}}]
+$g=23,h=8,n=6,k=4$: $\frac{\binom84\binom{15}2}{\binom{23}6}\approx0.0728$
+\end{bsp}
+\begin{bsp}[{{Lieferung 500 Teile, 20 defekt, Stichprobe 40}}]
+$P(\text{kein defekt})=\frac{\binom{20}0\binom{480}{40}}{\binom{500}{40}}\approx0.182$\\
+$E[X]=40\cdot\frac{20}{500}=1.6$\quad (Aufg.\ 3.4.14)\\
+$P(X\ge3)=1-P(0)-P(1)-P(2)\approx0.209$\\
+Binomial$(40,0.04)$: $\approx0.214$
+\end{bsp}
+\begin{bsp}[{{Aufg.\ 3.4.12: 280 Lose, 12 Gewinne, 8 kaufen}}]
+$P(X\ge2)=1-\frac{\binom{268}8}{\binom{280}8}-\frac{\binom{12}1\binom{268}7}{\binom{280}8}\approx0.041$
+\end{bsp}
+
+\subsection{Poisson-Verteilung}
+\begin{merke}[{{$X\sim\mathrm{Poisson}(\lambda)$, $\lambda>0$}}]
+\begin{itemize}
+\pfeil $\Omega_X=\mathbb N_0$, $\lambda$ = mittlere Anzahl Ereignisse
+\pfeil Anzahl seltener, unabhängiger Ereignisse (Anrufe/10 min, Unfälle/Tag, Besucher)
+\end{itemize}
+\end{merke}
+\begin{formel}
+$\displaystyle p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!}\qquad
+E[X]=\lambda\qquad \operatorname{var}(X)=\lambda$
+\end{formel}
+\begin{itemize}
+\pfeil $E=\operatorname{var}$ $\Rightarrow\sigma=\sqrt\lambda$
+\pfeil $P(X\ge k)=1-\sum_{j=0}^{k-1}e^{-\lambda}\frac{\lambda^j}{j!}$
+\pfeil Rate umrechnen: $\lambda$ passend zum Zeitintervall (5/s $\to$ 10 pro 2 s)
+\end{itemize}
+
+\subsubsection*{Näherung Binomial $\to$ Poisson}
+\begin{formel}
+$n$ gross, $p$ klein: \ $\mathrm{Binomial}(n,p)\approx\mathrm{Poisson}(\lambda=np)$
+\end{formel}
+\begin{itemize}
+\pfeil Satz 3.4.16: $p_n\to0$, $np_n\to\lambda$ $\Rightarrow$ $P(S_n=k)\to e^{-\lambda}\frac{\lambda^k}{k!}$
+\pfeil Funktioniert oft schon für kleines $n$ (z.\,B.\ $n=12$)
+\end{itemize}
+\begin{bsp}[{{12 Doppelwürfe, Doppelsechs: Bin$(12,\frac1{36})$ vs Poi$(\frac13)$}}]
+\begin{tabular}{@{}c|ccccc@{}}
+$k$&0&1&2&3&4\\\midrule
+Bin&0.7132&0.2445&0.0384&0.0037&0.0002\\
+Poi&0.7165&0.2388&0.0398&0.0044&0.0004
+\end{tabular}
+\end{bsp}
+\begin{bsp}[{{Aufg.\ 3.4.18: $p=0.001$, 500 Teile, $\ge2$ fehlerhaft}}]
+$\lambda=np=0.5$\\
+Bin: $1-0.999^{500}-500\cdot0.001\cdot0.999^{499}\approx0.09013$\\
+Poi: $1-e^{-0.5}(1+0.5)\approx0.09020$
+\end{bsp}
+
+\subsubsection*{Poisson-Approximation (Thm.\ 3.4.19)}
+\begin{itemize}
+\pfeil $E_1,\dots,E_n$ unabh., $P(E_i)=p_i$, $N$ = Anzahl eintretender $E_i$
+\pfeil $p_i$ dürfen \emph{verschieden} sein: $\lambda=p_1+\dots+p_n=E[N]$
+\end{itemize}
+\begin{formel}
+$\displaystyle |P(N\in B)-P(Z\in B)|\le\sum_{i=1}^np_i^2\le\lambda\max_ip_i$\\
+$Z\sim\mathrm{Poisson}(\lambda)$,\ alle $B\subset\mathbb N$\\
+gleiche $p$: Fehler $\le np^2$
+\end{formel}
+\begin{bsp}[{{Fehlerschranke Doppelwürfe}}]
+$n=12$, $p=\frac1{36}$: Fehler $\le12\cdot\frac1{1296}=\frac1{108}\approx0.009$
+\end{bsp}
+\begin{bsp}[{{Haiangriffe Florida: im Mittel $\lambda=2$ pro Jahr}}]
+$P(X\ge6)=1-\sum_{k=0}^5e^{-2}\frac{2^k}{k!}\approx0.017$\\
+$\to$ ca.\ 17 mal in 1000 Jahren
+\end{bsp}
+\begin{bsp}[{{Aufg.\ 3.4.21: Server, $\lambda=5$/s, max.\ 12/s}}]
+Break down: $P(X\ge13)=1-\sum_{k=0}^{12}e^{-5}\frac{5^k}{k!}\approx0.0020$
+\end{bsp}
+
+\subsection{Übersicht Verteilungen}
+\begin{center}
+\small
+\begin{tabular}{@{}lccc@{}}
+\toprule
+& $p_X(k)$ & $E[X]$ & $\operatorname{var}(X)$\\\midrule
+Geom$(p)$ & $(1-p)^{k-1}p$ & $\frac1p$ & $\frac{1-p}{p^2}$\\
+Bin$(n,p)$ & $\binom nk p^k(1-p)^{n-k}$ & $np$ & $np(1-p)$\\
+HypGeom$(g,h,n)$ & $\frac{\binom hk\binom{g-h}{n-k}}{\binom gn}$ & $n\frac hg$ & $n\frac hg(1-\frac hg)\frac{g-n}{g-1}$\\
+Poi$(\lambda)$ & $e^{-\lambda}\frac{\lambda^k}{k!}$ & $\lambda$ & $\lambda$\\\bottomrule
+\end{tabular}
+\end{center}
+\begin{merke}[{{Checkliste}}]
+\begin{itemize}
+\pfeil Typ erkennen (zurücklegen? $k$ Ausgänge? seltene Ereignisse?)
+\pfeil Parameter notieren, dann Formel einsetzen
+\pfeil «mindestens»: Komplement; «höchstens»: Summe von 0 bis $k$
+\pfeil Bin $\leftrightarrow$ Poi: $\lambda=np$;\ HypGeom $\leftrightarrow$ Bin: $p=\frac hg$
+\end{itemize}
+\end{merke}

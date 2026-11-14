@@ -1,0 +1,25 @@
+# OverLars: diese Dateien werden nicht mit GitHub geteilt
+.build/
+.overlars.json
+*.aux
+*.log
+*.synctex.gz
+*.synctex(busy)
+*.fdb_latexmk
+*.fls
+*.out
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.tmp
+~$*
+.~lock*
+desktop.ini
+Thumbs.db
+.DS_Store

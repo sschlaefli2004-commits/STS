@@ -1,0 +1,147 @@
+\section{Varianz \& Standardabweichung (Kap.\ 3.3)}
+
+\subsection{Funktionen von Zufallsvariablen}
+\begin{merke}[{{Idee}}]
+\begin{itemize}
+\pfeil $X:\Omega\to\mathbb R^n$ diskret, $f:\Omega_X\to\mathbb R^m$ $\Rightarrow$ $Y=f(X)=f\circ X$ ist wieder eine ZV
+\pfeil Verteilung von $X$ genügt, $(\Omega,\Sigma,P)$ nicht nötig
+\end{itemize}
+\end{merke}
+\begin{formel}
+$\displaystyle E[f(X)]=\sum_{x\in\Omega_X} f(x)\cdot p_X(x)$ \quad (Thm.\ 3.3.2)
+\end{formel}
+\begin{itemize}
+\pfeil Nur anwendbar, falls $E[f(X)]$ existiert (abs.\ Konvergenz)
+\pfeil Verteilung von $f(X)$ \emph{nicht} nötig: direkt $f(x)$ mit $p_X(x)$ gewichten
+\pfeil Linearität: $E[a_1X_1+\dots+a_nX_n]=\sum a_iE[X_i]$ (auch ohne Unabhängigkeit)
+\end{itemize}
+\begin{bsp}[{{$X$ = Augenzahl Würfel, $f(x)=x^2$}}]
+$E[X^2]=\tfrac16(1+4+9+16+25+36)=\tfrac{91}{6}\approx15.17$\\
+Achtung: $E[X^2]\neq(E[X])^2=3.5^2=12.25$
+\end{bsp}
+
+\subsection{Definition}
+\begin{formel}
+$\mu=E[X]$\\[1pt]
+$\displaystyle \operatorname{var}(X)=E\big[(X-\mu)^2\big]=\sum_{x\in\Omega_X}(x-\mu)^2\,p_X(x)\ \ge0$\\[1pt]
+$\sigma(X)=\sqrt{\operatorname{var}(X)}\ \ge0$
+\end{formel}
+\begin{itemize}
+\pfeil var = gewichtete Summe der quadrierten Abweichungen vom Erwartungswert
+\pfeil $\sigma$ = typische Abweichung vom $\mu$ (gleiche Einheit wie $X$)
+\pfeil Je grösser var, desto breiter streut $p_X$ um $\mu$
+\pfeil Existenz: $E[X^2]$ existiert $\Leftrightarrow$ var$(X)$ existiert
+\end{itemize}
+
+\subsection{Rechenregeln}
+\begin{formel}
+\textbf{Verschiebungssatz:}\quad
+$\operatorname{var}(X)=E[X^2]-(E[X])^2$
+\end{formel}
+\begin{formel}
+$\operatorname{var}(aX+b)=a^2\operatorname{var}(X)$\qquad
+$\sigma(aX+b)=|a|\,\sigma(X)$
+\end{formel}
+\begin{itemize}
+\pfeil Verschiebung $+b$: Streuung \emph{unverändert}
+\pfeil Skalierung $\cdot a$: $\sigma$ mal $|a|$, var mal $a^2$
+\pfeil $\operatorname{var}(X)\ge0$, also $E[X^2]\ge(E[X])^2$
+\pfeil $\operatorname{var}(X)=0\Leftrightarrow X$ konstant
+\end{itemize}
+
+\begin{merke}[{{Rechenschema Varianz (Tabelle)}}]
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+\item Verteilung $p_X(x)$ aufstellen (Summe $=1$ prüfen)
+\item $\mu=E[X]=\sum x\,p_X(x)$
+\item $E[X^2]=\sum x^2\,p_X(x)$
+\item $\operatorname{var}=E[X^2]-\mu^2$, \ $\sigma=\sqrt{\operatorname{var}}$
+\end{enumerate}
+\begin{itemize}
+\pfeil Alternativ: $\sum (x-\mu)^2p_X(x)$ (rechnet sich mühsamer)
+\end{itemize}
+\end{merke}
+
+\begin{bsp}[{{Scrabble-Stein, Punkte $X$ (102 Steine)}}]
+\begin{tabular}{@{}c|cccccccc@{}}
+$x$&0&1&2&3&4&6&8&10\\\midrule
+$p_X$&$\frac{2}{102}$&$\frac{64}{102}$&$\frac{13}{102}$&$\frac{8}{102}$&$\frac{7}{102}$&$\frac{4}{102}$&$\frac{2}{102}$&$\frac{2}{102}$
+\end{tabular}\\[2pt]
+$E[X]=\frac{64+26+24+28+24+16+20}{102}=\frac{101}{51}\approx1.98$\\
+$E[X^2]=\frac{64+52+72+112+144+128+200}{102}=\frac{386}{51}\approx7.57$\\
+$\operatorname{var}=\frac{386}{51}-\big(\frac{101}{51}\big)^2\approx3.65$,\ \ $\sigma\approx1.91$
+\end{bsp}
+
+\begin{bsp}[{{Würfel: $X$ = Augenzahl}}]
+$\mu=3.5$,\ $E[X^2]=\frac{91}{6}$\\
+$\operatorname{var}=\frac{91}{6}-\frac{49}{4}=\frac{35}{12}\approx2.92$,\ $\sigma\approx1.71$
+\end{bsp}
+
+\begin{bsp}[{{Summe zweier Würfel $S=X_1+X_2$}}]
+$\mu=E[S]=7$\\
+$\operatorname{var}(S)=\sum(s-7)^2p_S(s)=\frac{2\,(25\cdot1+16\cdot2+9\cdot3+4\cdot4+1\cdot5)}{36}+0$\\
+$=\frac{2\cdot105}{36}=\frac{35}{6}\approx5.83$,\ $\sigma\approx2.42$\\
+$\Rightarrow$ var$(X_1)+$var$(X_2)=\frac{35}{12}\cdot2$ (gilt für \emph{unabhängige} ZV)
+\end{bsp}
+
+\subsection{Chebyshev-Ungleichung}
+\begin{formel}
+$\displaystyle P\big(|X-\mu|\ge d\big)\le\frac{\operatorname{var}(X)}{d^2}\qquad(d>0)$
+\end{formel}
+\begin{formel}
+$d=k\sigma$:\quad $\displaystyle P\big(|X-\mu|\ge k\sigma\big)\le\frac1{k^2}$
+\end{formel}
+\begin{itemize}
+\pfeil $k=2$: $P(|X-\mu|\ge2\sigma)\le\frac14$\ \ ($k=3$: $\le\frac19$)
+\pfeil Gilt für \emph{jede} Verteilung (nur $\mu$, var nötig)
+\pfeil Obere Schranke, oft grob
+\pfeil Komplement: $P(|X-\mu|<d)\ge1-\frac{\operatorname{var}}{d^2}$
+\pfeil Nur sinnvoll für $d>\sigma$ (sonst Schranke $\ge1$)
+\end{itemize}
+\begin{bsp}[{{Chebyshev anwenden}}]
+$\mu=10$, $\sigma=2$, gesucht $P(|X-10|\ge6)$\\
+$d=6=3\sigma\Rightarrow P\le\frac{4}{36}=\frac19$
+\end{bsp}
+
+\subsection{Geometrische Verteilung}
+\begin{merke}[{{$X\sim\mathrm{Geom}(p)$, $0<p<1$}}]
+\begin{itemize}
+\pfeil $X$ = Anzahl Versuche bis 1.\ Erfolg, $n\in\mathbb N$
+\pfeil $p_X(n)=(1-p)^{n-1}p$
+\end{itemize}
+\end{merke}
+\begin{formel}
+$\displaystyle E[X]=\frac1p\qquad
+\operatorname{var}(X)=\frac{1-p}{p^2}\qquad
+\sigma(X)=\frac{\sqrt{1-p}}{p}$
+\end{formel}
+\begin{formel}
+$\displaystyle P(X\le k)=1-(1-p)^k$
+\end{formel}
+\begin{itemize}
+\pfeil Je kleiner $p$, desto grösser $\mu$ \emph{und} Streuung
+\end{itemize}
+\begin{bsp}[{{Aufg.\ 3.3.10: Gewinnwahrsch.\ $p=\frac1{10}$}}]
+$E[X]=\frac1p=10$ Spiele\\
+$\operatorname{var}=\frac{0.9}{0.01}=90$,\ \ $\sigma=\sqrt{90}\approx9.49$\\
+$\Rightarrow$ $\sigma\approx\mu$: sehr breite Streuung
+\end{bsp}
+
+\subsection{Prüfungsbeispiele (Muster)}
+\begin{bsp}[{{Roulette-Gewinn $X\in\{-1,+1\}$, $p=\frac{20}{38},\frac{18}{38}$}}]
+$\mu=-\frac{2}{38}\approx-0.053$,\ $E[X^2]=1$\\
+$\operatorname{var}=1-\mu^2\approx0.997$,\ $\sigma\approx1$
+\end{bsp}
+\begin{bsp}[{{Lineare Transformation}}]
+$\sigma(X)=3$, $Y=-2X+5$\\
+$\operatorname{var}(Y)=(-2)^2\cdot9=36$,\ $\sigma(Y)=2\cdot3=6$\\
+(die $+5$ ändert nichts)
+\end{bsp}
+\begin{merke}[{{Checkliste}}]
+\begin{itemize}
+\pfeil $\sum p_X=1$?\ \ $\mu$ zuerst, dann $E[X^2]$
+\pfeil $E[X^2]\ne(E[X])^2$
+\pfeil var $\ge0$ als Kontrolle (negativ $\Rightarrow$ Rechenfehler)
+\pfeil Faktor $a$: $a^2$ bei var, $|a|$ bei $\sigma$
+\pfeil Verteilung bekannt (Geom)? $\to$ Formel statt Rechnen
+\end{itemize}
+\end{merke}

@@ -1,0 +1,75 @@
+% spick.sty - Vorlage für 3-Spalten-Spicks (A4 quer, pdfLaTeX)
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{spick}[2026/11/13 Spick-Vorlage]
+
+\RequirePackage[utf8]{inputenc}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[ngerman]{babel}
+\RequirePackage{amsmath,amssymb}
+\RequirePackage{multicol,graphicx,xcolor,enumitem,booktabs,array}
+\RequirePackage{titlesec,fancyhdr,lastpage,tcolorbox,listings,needspace}
+\RequirePackage[a4paper,landscape,margin=6mm,includehead,
+                headheight=12pt,headsep=2mm,nofoot]{geometry}
+\setlength{\footskip}{0pt}
+
+% Farben (Blau; im SW-Druck über Hell/Dunkel lesbar)
+\definecolor{spickA}{HTML}{0B5C8E}   % Kapitel (dunkel)
+\definecolor{spickB}{HTML}{5BB8E8}   % Unterkapitel (hell)
+\definecolor{spickC}{HTML}{EAF4FB}   % Hintergrund Merkbox
+
+% Layout
+\setlength{\columnsep}{4mm}
+\setlength{\columnseprule}{0.2pt}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{1pt}
+\setlength{\abovedisplayskip}{2pt}\setlength{\belowdisplayskip}{2pt}
+\setlength{\abovedisplayshortskip}{1pt}\setlength{\belowdisplayshortskip}{1pt}
+\setlist{nosep,leftmargin=*,itemsep=0pt}
+\renewcommand{\arraystretch}{1.1}
+\setlength{\tabcolsep}{2pt}
+\raggedcolumns
+\setlength{\emergencystretch}{3em}
+
+% Überschriften
+\newcommand{\spickbar}[3]{\colorbox{#1}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{\color{#2}\bfseries #3}}}
+\newcommand{\secbar}[1]{\spickbar{spickA}{white}{\thesection\hspace{0.6em}#1}}
+\newcommand{\subbar}[1]{\spickbar{spickB}{black}{\thesubsection\hspace{0.6em}#1}}
+\titleformat{\section}{\normalfont}{}{0pt}{\needspace{6\baselineskip}\secbar}
+\titleformat{\subsection}{\normalfont}{}{0pt}{\needspace{5\baselineskip}\subbar}
+\titleformat{\subsubsection}{\normalfont\bfseries\color{spickA}}{\thesubsubsection}{0.5em}{}
+\titlespacing*{\section}{0pt}{3pt}{2pt}
+\titlespacing*{\subsection}{0pt}{2pt}{1pt}
+\titlespacing*{\subsubsection}{0pt}{2pt}{0pt}
+
+% Kopfzeile: Titel | Seite x von y | Autor, Datum
+\newcommand{\spicktitel}[1]{\gdef\spick@titel{#1}}
+\newcommand{\spickautor}[1]{\gdef\spick@autor{#1}}
+\gdef\spick@titel{Spick}
+\gdef\spick@autor{Simon Schläfli}
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancyhead[L]{\textbf{\spick@titel}}
+\fancyhead[C]{Seite \thepage\ von \pageref{LastPage}}
+\fancyhead[R]{\spick@autor, \today}
+
+% Bausteine
+\newtcolorbox{formel}{colback=white,colframe=black,boxrule=0.4pt,arc=0pt,
+  boxsep=1pt,left=1pt,right=1pt,top=1pt,bottom=1pt,halign=center}
+\newtcolorbox{merke}[1][Merke]{colback=spickC,colframe=spickA,boxrule=0.4pt,
+  arc=0pt,boxsep=1pt,left=2pt,right=2pt,top=1pt,bottom=1pt,
+  title=#1,fonttitle=\bfseries\scriptsize,coltitle=white,
+  toptitle=0.5pt,bottomtitle=0.5pt}
+\newtcolorbox{bsp}[1][Beispiel]{colback=white,colframe=spickB,boxrule=0.4pt,
+  arc=0pt,boxsep=1pt,left=2pt,right=2pt,top=1pt,bottom=1pt,
+  title=#1,fonttitle=\bfseries\scriptsize,coltitle=black,
+  toptitle=0.5pt,bottomtitle=0.5pt}
+\graphicspath{{bilder/}}
+\newcommand{\bild}[2][1]{\par\begin{center}\includegraphics[width=#1\linewidth]{#2}\end{center}\par}
+\newcommand{\pfeil}{\item[$\triangleright$]}
+
+% Code (z. B. Assembler)
+\lstset{basicstyle=\ttfamily\scriptsize,columns=fullflexible,
+  breaklines=true,frame=single,framerule=0.2pt,aboveskip=1pt,belowskip=1pt,
+  xleftmargin=1pt,xrightmargin=1pt,showstringspaces=false}
+
+\endinput
