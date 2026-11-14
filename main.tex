@@ -1,11 +1,16 @@
 \documentclass[a4paper,landscape,7pt]{extarticle}
 \usepackage{spick}
-\spicktitel{Wahrscheinlichkeit -- Kap. 3.3 und 3.4}
-\renewcommand{\thesection}{3.\arabic{section}}
-\setcounter{section}{2}
+\spicktitel{Wahrscheinlichkeit -- Kap. 3.3, 3.4 und 4.0--4.3}
+\renewcommand{\thesection}{\chapnum.\arabic{section}}
 \begin{document}
 \begin{multicols}{3}
+\newcommand{\chapnum}{3}\setcounter{section}{2}
 \input{kapitel/01-varianz}
 \input{kapitel/02-verteilungen}
+\def\chapnum{4}\setcounter{section}{-1}
+\input{kapitel/03-zufallsvariablen}
+\input{kapitel/04-erwartung-stetig}
+\input{kapitel/05-stetige-verteilungen}
+\input{kapitel/06-transformationen}
 \end{multicols}
 \end{document}

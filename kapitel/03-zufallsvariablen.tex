@@ -1,0 +1,82 @@
+\needspace{14\baselineskip}
+\section{Zufallsvariablen (Kap.\ 4.0)}
+
+\subsection{Verteilungsfunktion}
+\begin{formel}
+$F_X(x)=P(X\le x)$\qquad $F_X:\mathbb R\to[0,1]$
+\end{formel}
+\begin{formel}
+$P(a<X\le b)=F_X(b)-F_X(a)$
+\end{formel}
+\begin{itemize}
+\pfeil $X:\Omega\to\mathbb R$, Bedingung: $\{X\le x\}\in\Sigma$ für alle $x$
+\pfeil $F_X$ genügt, um \emph{alle} Wahrscheinlichkeiten zu berechnen ($\Omega$ nicht nötig)
+\pfeil Bei überabzählbarem $\Omega_X$ reichen $P(X=x)$ nicht $\Rightarrow$ man braucht $P(X\le x)$
+\end{itemize}
+
+\begin{merke}[{{Eigenschaften von $F_X$ (Satz 4.0.5)}}]
+\begin{itemize}
+\pfeil monoton steigend: $F(x_1)\le F(x_2)$ für $x_1<x_2$
+\pfeil $\lim_{x\to-\infty}F=0$,\ \ $\lim_{x\to\infty}F=1$
+\pfeil rechtsstetig: $\lim_{y\downarrow x}F(y)=F(x)$
+\pfeil linker Grenzwert: $\lim_{y\uparrow x}F(y)=P(X<x)$
+\pfeil Sprunghöhe bei $x$ $=P(X=x)$
+\end{itemize}
+\end{merke}
+
+\subsection{Diskret / stetig / absolut stetig}
+\begin{tabular}{@{}p{0.2\linewidth}p{0.76\linewidth}@{}}
+\toprule
+\textbf{diskret} & $F_D(x)=\sum_{d\le x}p_D(d)$: rechtsstetige \emph{Treppenfunktion}, Sprünge bei $d\in\Omega_D$, Höhe $p_D(d)$\\
+\textbf{stetig} & $F_X$ ohne Sprünge $\Rightarrow$ $P(X=x)=0$ für alle $x$\\
+ & $P(a<X\le b)=P(a\le X\le b)=P(a<X<b)=F(b)-F(a)$ (Ränder egal)\\
+\textbf{abs.\ stetig} & $F_X(x)=\int_{-\infty}^x f_X(t)\,dt$, Dichte $f_X\ge0$ (integrierbar)\\
+\bottomrule
+\end{tabular}
+
+\subsection{Dichte}
+\begin{formel}
+$\displaystyle P(a\le X\le b)=\int_a^b f_X(t)\,dt$\qquad
+$\displaystyle\int_{-\infty}^{\infty}f_X(t)\,dt=1$\qquad
+$f_X=F_X'$
+\end{formel}
+\begin{itemize}
+\pfeil $P$ = \emph{Fläche} unter $f_X$ über $[a,b]$
+\pfeil $f_X(x)\approx\frac{P(x-\delta\le X\le x+\delta)}{2\delta}$ = Wahrscheinlichkeit pro Länge
+\pfeil $f_X$ ist \emph{keine} Wahrscheinlichkeit: darf $>1$ sein, nur $\int f_X=1$ nötig (z.\,B. Gleichvert.\ auf $[0,\tfrac12]$: $f=2$)
+\pfeil «Verteilung» meint $F_X$ oder (abs.\ stetig) $f_X$
+\end{itemize}
+
+\subsection{Quantile}
+\begin{formel}
+$F_X(x_p)=p$ \quad ($0<p<1$)\qquad Median: $p=\tfrac12$
+\end{formel}
+\begin{itemize}
+\pfeil $P(X\le x_p)=p$
+\pfeil Rechenschema: $F_X(x)=p$ nach $x$ auflösen
+\pfeil $f_X>0$ überall $\Rightarrow$ genau ein $x_p$; sonst evtl.\ keins / mehrere
+\end{itemize}
+
+\begin{bsp}[{{Tram: $X\sim$ Gleichvert.\ auf $(0,10]$ (4.0.3, 4.0.7)}}]
+$F(x)=\frac{x}{10}$ für $0<x\le10$ \ (0 davor, 1 danach)\\
+$P(5<X\le9)=F(9)-F(5)=0.9-0.5=0.4$\\
+$P(X<2)=F(2)=0.2$\\
+$P(X=x)=0$, denn $P(X=x)\le P(x-\varepsilon<X\le x)=\frac{\varepsilon}{10}\to0$
+\end{bsp}
+\begin{bsp}[{{Rundung (4.0.4)}}]
+$R=x-\mathrm{rd}(x)\in[-\tfrac12,\tfrac12)$, gleichverteilt: $F_R(r)=r+\tfrac12$ auf $[-\tfrac12,\tfrac12]$, $f_R=1$
+\end{bsp}
+\begin{bsp}[{{$S$ = Summe zweier 4-seitiger Würfel (4.0.6)}}]
+$p_S(2..8)=\frac1{16},\frac2{16},\frac3{16},\frac4{16},\frac3{16},\frac2{16},\frac1{16}$\\
+$F_S$: $0\,(x<2)$; $\frac1{16}\,[2,3)$; $\frac3{16}\,[3,4)$; $\frac6{16}\,[4,5)$; $\frac{10}{16}\,[5,6)$; $\frac{13}{16}\,[6,7)$; $\frac{15}{16}\,[7,8)$; $1\,(x\ge8)$\\
+Treppe, Sprunghöhe $=p_S$
+\end{bsp}
+\begin{bsp}[{{Gleichverteilung auf $[a,b]$ (4.0.9)}}]
+$F(x)=\frac{x-a}{b-a}$ auf $(a,b]$ ist stetig und stückweise differenzierbar $\Rightarrow$ abs.\ stetig mit $f(x)=\frac1{b-a}$ auf $(a,b]$, sonst 0
+\end{bsp}
+\begin{bsp}[{{Exponentialverteilung (4.0.10, 4.0.13)}}]
+$f(x)=\lambda e^{-\lambda x}$, $F(x)=1-e^{-\lambda x}$ ($x>0$). Für $\lambda=1$:\\
+$P(X\le1)=1-e^{-1}\approx0.632$;\ $P(1\le X\le2)=e^{-1}-e^{-2}\approx0.233$;\ $P(X\ge2)=e^{-2}\approx0.135$\\
+Quantil: $1-e^{-\lambda x_p}=p\Rightarrow x_p=\frac{-\ln(1-p)}{\lambda}$\\
+$\lambda=4$: $x_{0.8}=\frac{\ln5}4\approx0.402$, Median $=\frac{\ln2}4\approx0.173$
+\end{bsp}

@@ -1,0 +1,57 @@
+\needspace{14\baselineskip}
+\section{Erwartungswert \& Varianz stetig (Kap.\ 4.1)}
+
+\begin{merke}[{{Diskret $\to$ stetig}}]
+\begin{itemize}
+\pfeil Summe $\sum x\,p(x)$ wird zu Integral $\int t\,f(t)\,dt$: Dichte = Gewichtsfunktion
+\pfeil Bedeutung und Rechenregeln identisch zum diskreten Fall
+\end{itemize}
+\end{merke}
+
+\subsection{Erwartungswert}
+\begin{formel}
+$\displaystyle E[X]=\int_{-\infty}^{\infty}t\,f_X(t)\,dt$ \quad (falls Integral existiert)
+\end{formel}
+\begin{formel}
+$\displaystyle E[r(X)]=\int_{-\infty}^{\infty}r(t)\,f_X(t)\,dt$\qquad
+$E[aX+bY]=aE[X]+bE[Y]$
+\end{formel}
+\begin{itemize}
+\pfeil Dichte von $r(X)$ \emph{nicht} nötig: direkt $r(t)$ mit $f_X(t)$ gewichten
+\pfeil $E[aX+b]=aE[X]+b$
+\pfeil Mittelwert vieler unabhängiger Kopien $\approx E[X]$
+\end{itemize}
+
+\subsection{Varianz}
+\begin{formel}
+$\displaystyle\operatorname{var}(X)=E[(X-\mu)^2]=\int_{-\infty}^\infty(t-\mu)^2f_X(t)\,dt$\qquad $\sigma=\sqrt{\operatorname{var}}$
+\end{formel}
+\begin{formel}
+$\operatorname{var}(X)=E[X^2]-(E[X])^2$\\[1pt]
+$\operatorname{var}(aX+b)=a^2\operatorname{var}(X)$\qquad $\sigma(aX+b)=|a|\,\sigma(X)$
+\end{formel}
+
+\begin{merke}[{{Rechenschema}}]
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+\item $\mu=\int t\,f(t)\,dt$ \ (nur dort integrieren, wo $f\ne0$)
+\item $E[X^2]=\int t^2f(t)\,dt$
+\item $\operatorname{var}=E[X^2]-\mu^2$
+\end{enumerate}
+\begin{itemize}
+\pfeil Exponential: partielle Integration $\int t\,e^{-\lambda t}dt=-te^{-\lambda t}-\tfrac{e^{-\lambda t}}{\lambda}$
+\end{itemize}
+\end{merke}
+
+\begin{bsp}[{{Exponential (4.1.2)}}]
+$E[X]=\int_0^\infty t\lambda e^{-\lambda t}dt=\lim_{x\to\infty}\big[-te^{-\lambda t}-\tfrac{e^{-\lambda t}}{\lambda}\big]_0^x=\frac1\lambda$
+\end{bsp}
+\begin{bsp}[{{Gleichverteilung $[a,b]$ (4.1.8)}}]
+$E[X]=\frac1{b-a}\int_a^bt\,dt=\frac{b^2-a^2}{2(b-a)}=\frac{a+b}2$\\
+$E[X^2]=\frac{b^3-a^3}{3(b-a)}$\\
+$\operatorname{var}=\frac{b^3-a^3}{3(b-a)}-\frac{(a+b)^2}4=\frac{(b-a)^2}{12}$
+\end{bsp}
+\begin{bsp}[{{Kleine Aufgaben (4.1.3, 4.1.5, 4.1.9)}}]
+Tram ($U(0,10)$): $E[X]=\frac{0+10}2=5$ min\\
+$E[X]=e$, $Y=3X+2$: $E[Y]=3e+2$\\
+Standardisierung $Y=\frac{X-\mu}{\sigma}$: $E[Y]=\frac{E[X]-\mu}\sigma=0$, $\operatorname{var}(Y)=\frac{\sigma^2}{\sigma^2}=1$
+\end{bsp}

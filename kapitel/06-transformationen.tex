@@ -1,0 +1,81 @@
+\section{Transformationen (Kap.\ 4.3)}
+
+\subsection{Mit der Verteilungsfunktion}
+\begin{formel}
+$F^{-1}(y)=\min\{t\mid F(t)\ge y\}$ \quad (= Umkehrfunktion, falls $F$ stetig \& strikt steigend)
+\end{formel}
+\begin{merke}[{{Satz 4.3.1}}]
+\begin{itemize}
+\pfeil $X$ stetig $\Rightarrow$ $Y=F_X(X)\sim U(0,1)$
+\pfeil $U\sim U(0,1)$ $\Rightarrow$ $F^{-1}(U)$ hat Verteilungsfunktion $F$ \ \ (\emph{Zufallsgenerator})
+\end{itemize}
+\end{merke}
+\begin{merke}[{{Rechenschema Generator}}]
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+\item $y=F(x)$ nach $x$ auflösen $\Rightarrow$ $F^{-1}(y)$
+\item $U\sim U(0,1)$ ziehen, $X=F^{-1}(U)$
+\end{enumerate}
+\end{merke}
+\begin{bsp}[{{Exponential (4.3.2)}}]
+$y=1-e^{-\lambda x}\Rightarrow F^{-1}(y)=\frac{-\ln(1-y)}{\lambda}$, also $X=\frac{-\ln(1-U)}\lambda$ (auch $\frac{-\ln U}{\lambda}$, da $1-U\sim U$)
+\end{bsp}
+\begin{bsp}[{{Potenzgesetz $p=2$ (4.3.3)}}]
+$F(x)=1-\frac1x\Rightarrow F^{-1}(y)=\frac1{1-y}$, also $X=\frac1{1-U}$\\
+Kontrolle: Histogramm von 10000 Werten $\approx f(x)=x^{-2}$
+\end{bsp}
+
+\subsection{Transformation von Dichten}
+\begin{formel}
+$Y=r(X)$,\ $r:(a,b)\to(c,d)$ bijektiv, stetig diff'bar, $s=r^{-1}$:\\[1pt]
+$f_Y(y)=f_X\big(s(y)\big)\,|s'(y)|$ für $c<y<d$, sonst 0
+\end{formel}
+\begin{itemize}
+\pfeil $|s'|=s'$ falls $r$ steigend, $=-s'$ falls $r$ fallend
+\pfeil Nicht bijektiv: Fälle aufteilen (monotone Teilstücke), Beiträge \emph{addieren}
+\end{itemize}
+\begin{merke}[{{Rechenschema}}]
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+\item Wertebereich $(c,d)$ von $Y$ bestimmen, $r$ monoton?
+\item Inverse $s(y)=r^{-1}(y)$, Ableitung $s'(y)$
+\item $f_Y(y)=f_X(s(y))\cdot|s'(y)|$
+\item Kontrolle: $\int f_Y=1$
+\end{enumerate}
+\begin{itemize}
+\pfeil Alternativ direkt: $F_Y(y)=P(r(X)\le y)$ umformen, dann ableiten
+\end{itemize}
+\end{merke}
+\begin{bsp}[{{$Y=X^2$, $X\sim$ Exp$(\lambda)$ (4.3.4, 4.3.6)}}]
+Handrechnung: $P(Y<y)=P(-\sqrt y<X<\sqrt y)=1-e^{-\lambda\sqrt y}$, ableiten\\
+Formel: $r(x)=x^2$ steigend, $s(y)=\sqrt y$, $s'=\frac1{2\sqrt y}$\\
+$f_Y(y)=\dfrac{\lambda e^{-\lambda\sqrt y}}{2\sqrt y}$, $y>0$
+\end{bsp}
+\begin{bsp}[{{Affin: $X\sim N(\mu,\sigma)$, $Y=aX+b$ (4.3.7)}}]
+$s(y)=\frac{y-b}a$, $|s'|=\frac1{|a|}$\\
+$f_Y(y)=\frac1{|a|}f_X\big(\tfrac{y-b}a\big)\Rightarrow Y\sim N\big(a\mu+b,\ |a|\sigma\big)$\\
+Spezialfall: $a=\frac1\sigma,b=-\frac\mu\sigma$ $\Rightarrow$ $Z\sim N(0,1)$
+\end{bsp}
+\begin{bsp}[{{Photonen an Wand (4.3.9)}}]
+Abstand 2 m, $\gamma\sim U(-\frac\pi4,\frac\pi4)$, $f_\gamma=\frac2\pi$\\
+Auftreffpunkt $Y=2\tan\gamma\in(-2,2)$, $s(y)=\arctan\frac y2$, $s'=\frac{2}{4+y^2}$\\
+$f_Y(y)=\dfrac{4}{\pi(4+y^2)}$ für $|y|<2$ (Cauchy-artig)
+\end{bsp}
+\begin{bsp}[{{Ballwurf, nicht monoton (4.3.8)}}]
+$\alpha\sim U(0,\frac\pi2)$, Aufschlag $Y=k\sin(2\alpha)$, $k=\frac{v_0}g$ (wie Folien)\\
+$r$ steigt auf $(0,\frac\pi4)$, fällt auf $(\frac\pi4,\frac\pi2)$, je mit Gewicht $\frac12$\\
+Je Teil: $s(y)=\frac12\arcsin\frac yk$ bzw.\ $\frac\pi2-\frac12\arcsin\frac yk$, $|s'|=\frac1{2\sqrt{k^2-y^2}}$\\
+Beide Teile liefern gleich viel: $f_Y(y)=\dfrac{2}{\pi}\dfrac1{\sqrt{k^2-y^2}}$, $0<y<k$\\
+Dichte $\to\infty$ bei $y\to k$: Werte nahe $k$ häufig. $k=4$: $P(3.5<Y<4)\approx0.322$
+\end{bsp}
+
+\subsection{Lognormal}
+\begin{formel}
+$Y=\ln X\sim N(\mu,\sigma)$ $\Leftrightarrow$ $X=e^Y$ lognormal$(\mu,\sigma)$
+\end{formel}
+\begin{formel}
+$f_X(x)=\dfrac1{x\sigma\sqrt{2\pi}}\,e^{-\frac{(\ln x-\mu)^2}{2\sigma^2}}$ ($x>0$)\qquad $E[X]=e^{\mu+\sigma^2/2}$
+\end{formel}
+\begin{itemize}
+\pfeil Herleitung (4.3.10): $r=e^y$, $s(x)=\ln x$, $s'=\frac1x$, $f_X=f_Y(\ln x)\cdot\frac1x$
+\pfeil $E[X]=E[e^Y]=\int e^t f_Y(t)\,dt$ (Quadrat ergänzen)
+\pfeil Heavy-Tail-Verteilung, nur positive Werte
+\end{itemize}

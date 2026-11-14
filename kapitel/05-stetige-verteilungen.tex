@@ -1,0 +1,110 @@
+\section{Stetige Verteilungen (Kap.\ 4.2)}
+
+\begin{merke}[{{Übersicht}}]
+\begin{tabular}{@{}p{0.2\linewidth}p{0.3\linewidth}p{0.2\linewidth}@{}p{0.2\linewidth}@{}}
+\toprule
+ & \textbf{Dichte} $f(x)$ & $E[X]$ & $\operatorname{var}$\\
+\midrule
+Gleich $(a,b)$ & $\frac1{b-a}$ auf $(a,b]$ & $\frac{a+b}2$ & $\frac{(b-a)^2}{12}$\\[2pt]
+Exp$(\lambda)$ & $\lambda e^{-\lambda x}$, $x>0$ & $\frac1\lambda$ & $\frac1{\lambda^2}$\\[2pt]
+$N(\mu,\sigma)$ & $\frac1{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$ & $\mu$ & $\sigma^2$\\[2pt]
+Potenz $p$ & $(p-1)x^{-p}$, $x>1$ & $\frac{p-1}{p-2}$ $(p>2)$ & $\frac{p-1}{(p-2)^2(p-3)}$ $(p>3)$\\
+\bottomrule
+\end{tabular}
+\end{merke}
+
+\subsection{Gleichverteilung}
+\begin{formel}
+$F(x)=\frac{x-a}{b-a}$ $(a<x\le b)$\qquad $f=\frac1{b-a}$\\[1pt]
+$E=\frac{a+b}2$\qquad var$=\frac{(b-a)^2}{12}$
+\end{formel}
+\begin{itemize}
+\pfeil $P(c<X\le d)=\frac{d-c}{b-a}$: proportional zur Länge
+\pfeil Zufallsgeneratoren: aus $U(0,1)$ lassen sich alle Verteilungen bauen (4.3)
+\pfeil Drehung mit irrationalem $\omega/2\pi$: Winkel $\alpha_k$ gleichverteilt (nicht periodisch)
+\end{itemize}
+
+\subsection{Exponentialverteilung}
+\begin{formel}
+$F(x)=1-e^{-\lambda x}$\quad $P(X>x)=e^{-\lambda x}$\quad $E=\frac1\lambda$\quad var$=\frac1{\lambda^2}$
+\end{formel}
+\begin{itemize}
+\pfeil Wartezeit zwischen Ereignissen; stetige Version der geometr.\ Verteilung
+\pfeil Rate $\lambda$ gross $\Rightarrow$ kurze Wartezeit; $\lambda=\frac1{E[X]}$
+\pfeil Median $=\frac{\ln2}{\lambda}$
+\end{itemize}
+\begin{formel}
+Gedächtnislos: $P(X>x+d\mid X>x)=P(X>d)$
+\end{formel}
+\begin{itemize}
+\pfeil Beweis: $\frac{P(X>x+d)}{P(X>x)}=\frac{e^{-\lambda(x+d)}}{e^{-\lambda x}}=e^{-\lambda d}$
+\pfeil Schon $x$ gewartet $\Rightarrow$ Restwartezeit wie neu
+\end{itemize}
+\begin{bsp}[{{Postschalter (4.2.2)}}]
+Mittel 5 min $\Rightarrow\lambda=\frac15$: $P(X>12)=e^{-12/5}=e^{-2.4}\approx0.091$
+\end{bsp}
+\begin{bsp}[{{Kofferträger (4.2.3)}}]
+$X_1$: $f=\frac2{(1+x)^3}$: $P(X_1>x)=\frac1{(1+x)^2}$\\
+$P(X_1>2)=\frac19$;\ $P(X_1>4\mid X_1>2)=\frac{1/25}{1/9}=\frac9{25}=0.36$\\
+$X_2\sim$ Exp(1): $P(X_2>2)=e^{-2}\approx0.135$;\ bedingt: ebenfalls $e^{-2}$ (gedächtnislos)
+\end{bsp}
+
+\subsection{Normalverteilung $N(\mu,\sigma)$}
+\begin{formel}
+$f(x)=\frac1{\sqrt{2\pi\sigma^2}}e^{-\frac{(x-\mu)^2}{2\sigma^2}}$\quad $E=\mu$\quad var$=\sigma^2$
+\end{formel}
+\begin{formel}
+$\displaystyle F_X(x)=\Phi_{\mu,\sigma}(x)=\Phi\!\Big(\frac{x-\mu}{\sigma}\Big)$\qquad $\Phi(-x)=1-\Phi(x)$
+\end{formel}
+\begin{itemize}
+\pfeil $\Phi$ = Standard-Normal ($\mu=0,\sigma=1$), Werte aus Tabelle/Rechner
+\pfeil $F$ nicht geschlossen integrierbar $\Rightarrow$ immer \emph{standardisieren}: $Z=\frac{X-\mu}\sigma$
+\pfeil Symmetrie um $\mu$: $F(\mu-x)=1-F(\mu+x)$
+\pfeil Zentraler Grenzwertsatz: Summe vieler kleiner unabhängiger Beiträge $\approx$ normal
+\end{itemize}
+\begin{formel}
+$P(\mu-k\sigma\le X\le\mu+k\sigma)=2\Phi(k)-1$
+\end{formel}
+\begin{center}\small
+\begin{tabular}{@{}c|ccc|ccc@{}}
+$k$ & 1 & 2 & 3 & 1.645 & 1.96 & 2.576\\
+\midrule
+$2\Phi(k)-1$ & 0.683 & 0.955 & 0.997 & 0.90 & 0.95 & 0.99\\
+$\Phi(k)$ & 0.841 & 0.977 & 0.999 & 0.95 & 0.975 & 0.995\\
+\end{tabular}
+\end{center}
+\begin{merke}[{{Rechenschema Normalverteilung}}]
+\begin{enumerate}[label=\arabic*.,leftmargin=*]
+\item $P(X\le x)=\Phi\big(\frac{x-\mu}\sigma\big)$ (standardisieren)
+\item $P(X>x)=1-\Phi(\cdot)$;\ $P(a<X\le b)=\Phi(\tfrac{b-\mu}\sigma)-\Phi(\tfrac{a-\mu}\sigma)$
+\item Quantil: $x_p=\mu+\sigma\,\Phi^{-1}(p)$
+\end{enumerate}
+\end{merke}
+\begin{bsp}[{{Körpergrösse (4.2.5, 4.2.6)}}]
+$\mu=177,\sigma=10.2$: $P(X>197)=1-\Phi\big(\frac{20}{10.2}\big)=1-\Phi(1.96)\approx0.025$
+\end{bsp}
+\begin{bsp}[{{Sensor (4.2.7)}}]
+$\sigma=3.5$, $7=2\sigma$: $P(|\text{Fehler}|>7)=1-0.955\approx0.045$ (ohne Rechner)
+\end{bsp}
+\begin{bsp}[{{Abfüllung (4.2.8)}}]
+$\mu=100,\sigma=5$, 90\,\% in $[100-c,100+c]$: $2\Phi(k)-1=0.9\Rightarrow k=1.645$, $c=1.645\cdot5\approx8.22$
+\end{bsp}
+
+\subsection{Potenzgesetz (Heavy Tail)}
+\begin{formel}
+$f(x)=(p-1)x^{-p}$,\ $F(x)=1-x^{-(p-1)}$\ ($x>1$) \quad $p>1$
+\end{formel}
+\begin{formel}
+$E=\frac{p-1}{p-2}$ $(p>2)$\qquad var$=\frac{p-1}{(p-2)^2(p-3)}$ $(p>3)$
+\end{formel}
+\begin{itemize}
+\pfeil Dichte fällt langsamer als bei Exp: grosse Werte häufiger (Pareto, Einkommen)
+\pfeil Je kleiner $p$, desto schwerer der Schwanz; $E$/var können nicht existieren
+\pfeil Weitere Heavy-Tails: Student-t, Lognormal
+\end{itemize}
+\begin{bsp}[{{Einkommen $p=\tfrac52$ (4.2.9)}}]
+$E[X]=\frac{1.5}{0.5}=3$\\
+$x_{0.8}$: $1-x^{-3/2}=0.8\Rightarrow x_{0.8}=5^{2/3}\approx2.924$\\
+$E[X\mid X>x_{0.8}]=\frac{1}{0.2}\int_{x_{0.8}}^\infty t\,\tfrac32t^{-5/2}dt=\frac{3\,x_{0.8}^{-1/2}}{0.2}=3\,x_{0.8}\approx8.77$\\
+(allgemein: $E[X\mid X>x]=\frac{p-1}{p-2}\,x$)
+\end{bsp}
