@@ -27,6 +27,8 @@ $E=\frac{a+b}2$\qquad var$=\frac{(b-a)^2}{12}$
 \subsection{Exponentialverteilung}
 \begin{formel}
 $F(x)=1-e^{-\lambda x}$\quad $P(X>x)=e^{-\lambda x}$\quad $E=\frac1\lambda$\quad var$=\frac1{\lambda^2}$
+\[ f_x(x) = \begin{cases} \lambda e^{-\lambda x} & \text{falls } x > 0 \\ 0 & \text{sonst} \end{cases} \]
+
 \end{formel}
 \begin{itemize}
 \pfeil Wartezeit zwischen Ereignissen; stetige Version der geometr.\ Verteilung
@@ -59,7 +61,7 @@ $\displaystyle F_X(x)=\Phi_{\mu,\sigma}(x)=\Phi\!\Big(\frac{x-\mu}{\sigma}\Big)$
 \begin{itemize}
 \pfeil $\Phi$ = Standard-Normal ($\mu=0,\sigma=1$), Werte aus Tabelle/Rechner
 \pfeil $F$ nicht geschlossen integrierbar $\Rightarrow$ immer \emph{standardisieren}: $Z=\frac{X-\mu}\sigma$
-\pfeil Symmetrie um $\mu$: $F(\mu-x)=1-F(\mu+x)$
+\pfeil Symmetrie um Erwartungswert $\mu$: $F(\mu-x)=1-F(\mu+x)$
 \pfeil Zentraler Grenzwertsatz: Summe vieler kleiner unabhängiger Beiträge $\approx$ normal
 \end{itemize}
 \begin{formel}
